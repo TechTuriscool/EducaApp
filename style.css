@@ -53,7 +53,7 @@ body {
 
 .menu-icon.red-background {
     color: red;
-    background-color: #ffc0cbbf;
+    background-color: rgba(255, 192, 203, 0.7);
 }
 
 .menu {

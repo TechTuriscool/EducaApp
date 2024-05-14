@@ -326,6 +326,7 @@ function showAlumnos() {
         alert("No hay alumnos en este curso");
     }
 }
+
 function showInfoSpecificAlumno() {
     // Obtener elementos del DOM
     let infoAlumnoDiv = document.getElementsByClassName("infoAlumno")[0];
@@ -345,30 +346,45 @@ function showInfoSpecificAlumno() {
         console.log("Survey Info Alumno:", surveyInfoAlumnoObj);
         let email = surveyInfoAlumnoObj[0].email;
         emailAlumnoDiv.innerHTML = `Email: ${email}`;
+        emailAlumnoDiv.style.fontWeight = 'bold';
+        emailAlumnoDiv.style.color = '#333';
 
         // Mostrar respuestas del alumno
         let responses = surveyInfoAlumnoObj[0].answers;
         for (let i = 0; i < responses.length; i++) {
             let response = document.createElement('p');
-            let answerText = responses[i].answer === null ? "No hay mensajes" : responses[i].answer;
-            response.innerHTML = `${responses[i].description}<br>${answerText}<br>`;
+            response.style.margin = "10px 0";
+            response.style.padding = "10px";
+            response.style.borderRadius = "8px";
+            response.style.backgroundColor = "#26D0C3";
+            response.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+
+            // Incorporar un span para las notas, si es aplicable
+            let answerText = responses[i].answer === null ? "No hay respuesta" : responses[i].answer;
+
+            response.innerHTML = `<strong>${responses[i].description}</strong><br>${answerText}<br>`;
             responsesAlumnoDiv.appendChild(response);
         }
+
         if (showAlumnosToggle) {
             infoAlumnoDiv.style.display = "block";
         } else {
             infoAlumnoDiv.style.display = "none";
         }
+
+        // Estilo del contenedor de información del alumno
         infoAlumnoDiv.style.backgroundColor = "#05BFAD";
+        infoAlumnoDiv.style.padding = "20px";
+        infoAlumnoDiv.style.borderRadius = "10px";
+        infoAlumnoDiv.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
+
         // Configurar el encabezado y agregar elementos al contenedor principal
-        infoAlimonialDiv.innerHTML = `Información del Alumno`;
+        infoAlumnoDiv.innerHTML = `Información del Alumno`;
         infoAlumnoDiv.appendChild(emailAlumnoDiv);
         infoAlumnoDiv.appendChild(responsesAlumnoDiv);
     } else {
         console.log("No se encontraron datos del alumno.");
     }
-
-    console.log("Email:", email);
 }
 function toggleMenu() {
     let menu = document.querySelector('.menu');
@@ -402,8 +418,6 @@ function closeMenu() {
     menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
     searchInput.value = ''; // Limpia el campo de búsqueda
 }
-
-
 function populateMenu(courses) {
     let menu = document.querySelector('.menu');
     menu.innerHTML = '';  // Limpia el menú existente
