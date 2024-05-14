@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     changeCoruseTitleContent();
 });
 
-if (location.pathname.includes("index.html")) {
+if (location.pathname.includes("index.html") || !location.pathname.includes("course.html")) {
     document.addEventListener('keyup', searchCourse);
 }
 
