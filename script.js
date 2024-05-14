@@ -211,7 +211,8 @@ function recoverySurveyInfoFromLocalStorage() {
                 mensajes.push(settingsObj.data[i].answers[4].answer);
             }
             else {
-                mensajes.push("No hay mensaje de opinion sobre este curso");
+                mensajeOpinionDiv.style.color = "red";
+                mensajes.push("⚠️ Los usuarios no han dejado opiniones sobre este curso");
 
             }
             //borrar duplicados
