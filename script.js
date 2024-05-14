@@ -391,7 +391,16 @@ function toggleMenu() {
         menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
     }
 }
+function closeMenu() {
+    let menu = document.querySelector('.menu');
+    let menuIcon = document.querySelector('.menu-icon');
+    let searchInput = document.querySelector('.search-input');
 
+    menu.classList.remove('active');
+    menuIcon.textContent = '⬇️ MOSTRAR CURSOS ⬇️';
+    menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
+    searchInput.value = ''; // Limpia el campo de búsqueda
+}
 
 
 function populateMenu(courses) {
@@ -434,7 +443,7 @@ function resetSearchCourse() {
 
     menuIcon.textContent = "⬇️ MOSTRAR CURSOS ⬇️";
     menuIcon.classList.remove('red-background');
-    toggleMenu();
+    closeMenu();
 }
 function start() {
     setLoadingMenuIcon(loading = true);
