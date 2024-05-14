@@ -332,7 +332,6 @@ function showAlumnos() {
         alert("No hay alumnos en este curso");
     }
 }
-
 function showInfoSpecificAlumno() {
     // Obtener elementos del DOM
     let infoAlumnoDiv = document.getElementsByClassName("infoAlumno")[0];
@@ -372,22 +371,17 @@ function showInfoSpecificAlumno() {
             responsesAlumnoDiv.appendChild(response);
         }
 
-        if (showAlumnosToggle) {
-            infoAlumnoDiv.style.display = "block";
-        } else {
-            infoAlumnoDiv.style.display = "none";
-        }
-
-        // Estilo del contenedor de información del alumno
-        infoAlumnoDiv.style.position = "relative"; // Agrega posición relativa
+        infoAlumnoDiv.style.position = "fixed"; 
+        infoAlumnoDiv.style.top = "50%"; 
+        infoAlumnoDiv.style.left = "50%";
+        infoAlumnoDiv.style.transform = "translate(-50%, -50%)";
+        infoAlumnoDiv.style.visibility = "visible";
+        infoAlumnoDiv.style.opacity = "1"
+        infoAlumnoDiv.style.transition = "visibility 0s, opacity 0.4s"; 
         infoAlumnoDiv.style.backgroundColor = "#05BFAD";
         infoAlumnoDiv.style.padding = "20px";
         infoAlumnoDiv.style.borderRadius = "10px";
         infoAlumnoDiv.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
-        infoAlumnoDiv.style.marginTop = "20px";
-        infoAlumnoDiv.style.marginBottom = "50px";
-
-
 
         // Configurar el encabezado y agregar elementos al contenedor principal
         infoAlumnoDiv.innerHTML = `Información del Alumno`;
@@ -396,18 +390,18 @@ function showInfoSpecificAlumno() {
 
         // Crear botón de cierre
         let closeButton = document.createElement('button');
-        closeButton.textContent = 'X';
+        closeButton.textContent = 'x';
         closeButton.style.position = 'absolute'; // Ajusta la posición a absoluta
         closeButton.style.top = '10px';
         closeButton.style.right = '10px';
-        closeButton.style.padding = '10px 15px';
+        closeButton.style.padding = '5px 10px';
         closeButton.style.border = 'none';
-        closeButton.style.background = '#006991';
+        closeButton.style.background = 'red';
         closeButton.style.color = 'white';
         closeButton.style.cursor = 'pointer';
-        closeButton.style.borderRadius = '10px';
         closeButton.onclick = function () {
-            infoAlumnoDiv.style.display = 'none';
+            infoAlumnoDiv.style.opacity = '0'; // Reduce la opacidad del contenedor a 0
+            infoAlumnoDiv.style.visibility = 'hidden'; // Oculta el contenedor
         };
 
         // Añadir el botón de cierre primero para asegurar que no se sobrescriba con otro contenido
