@@ -37,7 +37,11 @@ body {
     cursor: pointer;
     width: 95%;
     text-align: center;
-    transition: 0.4s
+    transition: 0.4s;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: black;
+    background-color: white;
 }
 
 .menu-icon:hover {
@@ -45,6 +49,11 @@ body {
     transition: 0.4s;
     border-radius: 10px
         /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
+.menu-icon.red-background {
+    color: red;
+    background-color: pink;
 }
 
 .menu {
@@ -78,6 +87,7 @@ body {
 
 .menu.active {
     display: flex;
+
     /* Cambiado a flex para mantener la flexibilidad con el contenido */
 }
 

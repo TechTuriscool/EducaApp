@@ -68,7 +68,7 @@ function setLoadingMenuIcon() {
     if (loading) {
         menuIcon.textContent = '⏳CARGANDO CURSOS...';
     } else {
-        menuIcon.textContent = ' ⬇️ SELECCIONA UN CURSO ⬇️';
+        menuIcon.textContent = ' ⬇️ MOSTRAR CURSOS ⬇️';
     }
 }
 async function fetchCourseContent(courseId, courseTitle) {
@@ -370,25 +370,30 @@ function showInfoSpecificAlumno() {
     console.log("Email:", email);
 }
 function toggleMenu() {
-    deployCoursesActive = !deployCoursesActive;
     let menu = document.querySelector('.menu');
     let isActive = menu.classList.contains('active');
     let menuIcon = document.querySelector('.menu-icon');
+    let searchInput = document.querySelector('.search-input');
 
-    if (deployCoursesActive) {
-        menuIcon.textContent = '⬆️ OCULTAR CURSOS ⬆️';
+    if (!isActive) {
+        menu.classList.add('active');
+        menuIcon.textContent = 'CERRAR';
+        menuIcon.classList.add('red-background'); // Aplica la clase con fondo rojo
+
+        if (searchInput.value !== '') {
+            searchCourse();
+        } else {
+            populateMenu(courseList);
+        }
     } else {
-        menuIcon.textContent = '⬇️ DESPLEGAR LISTADO CURSOS ⬇️';
-    }
-    // Verifica si la búsqueda está activa y si el menú está actualmente inactivo
-    if (searchActive && !isActive) {
-        searchCourse();  // Si hay una búsqueda activa, actualiza la lista de cursos
-    } else if (!isActive) {
-        populateMenu(courseList);  // Si no hay búsqueda activa, muestra todos los cursos
-    } else {
-        menu.classList.remove('active');  // Cierra el menú si está activo
+        menu.classList.remove('active');
+        menuIcon.textContent = '⬇️ MOSTRAR CURSOS ⬇️';
+        menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
     }
 }
+
+
+
 function populateMenu(courses) {
     let menu = document.querySelector('.menu');
     menu.innerHTML = '';  // Limpia el menú existente
@@ -405,7 +410,11 @@ function populateMenu(courses) {
 function searchCourse() {
     let searchInput = document.querySelector('.search-input');
     let isActive = document.querySelector('.menu').classList.contains('active');
+    let menuIcon = document.querySelector('.menu-icon');
 
+    menuIcon.textContent = " CERRAR";
+    menuIcon.classList.add('red-background');
+    // Aplica la clase con fondo rojo
     searchActive = searchInput.value !== '';  // Verifica si hay texto en el campo de búsqueda
 
     if (searchActive) {
@@ -418,9 +427,14 @@ function searchCourse() {
     }
 }
 function resetSearchCourse() {
+    let menuIcon = document.querySelector('.menu-icon');
     let searchInput = document.querySelector('.search-input');
     searchInput.value = '';
     searchCourse();
+
+    menuIcon.textContent = "⬇️ MOSTRAR CURSOS ⬇️";
+    menuIcon.classList.remove('red-background');
+    toggleMenu();
 }
 function start() {
     setLoadingMenuIcon(loading = true);
