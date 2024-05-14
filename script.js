@@ -420,7 +420,6 @@ function toggleMenu() {
     if (!isActive) {
         menu.classList.add('active');
         menuIcon.textContent = 'CERRAR';
-        menuIcon.classList.add('red-background'); // Aplica la clase con fondo rojo
 
         if (searchInput.value !== '') {
             searchCourse();
@@ -430,7 +429,6 @@ function toggleMenu() {
     } else {
         menu.classList.remove('active');
         menuIcon.textContent = '⬇️ MOSTRAR CURSOS ⬇️';
-        menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
     }
 }
 function closeMenu() {
@@ -440,7 +438,6 @@ function closeMenu() {
 
     menu.classList.remove('active');
     menuIcon.textContent = '⬇️ MOSTRAR CURSOS ⬇️';
-    menuIcon.classList.remove('red-background'); // Remueve la clase, regresando al fondo blanco
     searchInput.value = ''; // Limpia el campo de búsqueda
 }
 function populateMenu(courses) {
@@ -462,7 +459,6 @@ function searchCourse() {
     let menuIcon = document.querySelector('.menu-icon');
 
     menuIcon.textContent = " CERRAR";
-    menuIcon.classList.add('red-background');
     // Aplica la clase con fondo rojo
     searchActive = searchInput.value !== '';  // Verifica si hay texto en el campo de búsqueda
 
@@ -482,7 +478,6 @@ function resetSearchCourse() {
     searchCourse();
 
     menuIcon.textContent = "⬇️ MOSTRAR CURSOS ⬇️";
-    menuIcon.classList.remove('red-background');
     closeMenu();
 }
 function start() {
