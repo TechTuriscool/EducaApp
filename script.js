@@ -211,7 +211,7 @@ function recoverySurveyInfoFromLocalStorage() {
                 mensajes.push(settingsObj.data[i].answers[4].answer);
             }
             else {
-                mensajeOpinionDiv.style.color = "red";
+                mensajeOpinionDiv.style.color = "black";
                 mensajes.push("⚠️ Los usuarios no han dejado opiniones sobre este curso");
 
             }
@@ -292,8 +292,8 @@ function showAlumnos() {
         infoAlumnoDiv.style.display = 'block';
         alumnosMenu.style.display = 'block';
         alumnosIconDiv.textContent = 'CERRAR';
-        alumnosIconDiv.style.color = "red"
-        alumnosIconDiv.style.backgroundColor = "pink"
+        alumnosIconDiv.style.color = "black"
+        alumnosIconDiv.style.backgroundColor = "#efefef"
 
     } else {
         infoAlumnoDiv.style.display = 'none';
@@ -371,13 +371,13 @@ function showInfoSpecificAlumno() {
             responsesAlumnoDiv.appendChild(response);
         }
 
-        infoAlumnoDiv.style.position = "fixed"; 
-        infoAlumnoDiv.style.top = "50%"; 
+        infoAlumnoDiv.style.position = "fixed";
+        infoAlumnoDiv.style.top = "50%";
         infoAlumnoDiv.style.left = "50%";
         infoAlumnoDiv.style.transform = "translate(-50%, -50%)";
         infoAlumnoDiv.style.visibility = "visible";
         infoAlumnoDiv.style.opacity = "1"
-        infoAlumnoDiv.style.transition = "visibility 0s, opacity 0.4s"; 
+        infoAlumnoDiv.style.transition = "visibility 0s, opacity 0.4s";
         infoAlumnoDiv.style.backgroundColor = "#05BFAD";
         infoAlumnoDiv.style.padding = "20px";
         infoAlumnoDiv.style.borderRadius = "10px";
