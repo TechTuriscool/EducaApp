@@ -31,7 +31,11 @@ body {
     font-size: 30px;
     color: #05BFAD;
     display: flex;
+}
 
+.courseWrapper {
+    margin-top: 50px;
+    border-radius: 10px;
 
 }
 

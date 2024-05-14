@@ -298,9 +298,9 @@ function showAlumnos() {
     } else {
         infoAlumnoDiv.style.display = 'none';
         alumnosMenu.style.display = 'none';
-        alumnosIconDiv.textContent = '⬇️ VER ALUMNOS ⬇️';
+        alumnosIconDiv.textContent = '⬇️ SELECIONA UN ALUMNO ⬇️';
+        alumnosIconDiv.style.backgroundColor = "#ffffff"
         alumnosIconDiv.style.color = "black"
-        alumnosIconDiv.style.backgroundColor = "#ffffff";
         return
     }
     alumnosMenu.innerHTML = '';
@@ -332,6 +332,7 @@ function showAlumnos() {
         alert("No hay alumnos en este curso");
     }
 }
+
 function showInfoSpecificAlumno() {
     // Obtener elementos del DOM
     let infoAlumnoDiv = document.getElementsByClassName("infoAlumno")[0];
@@ -339,7 +340,6 @@ function showInfoSpecificAlumno() {
     let responsesAlumnoDiv = document.getElementsByClassName("responsesAlumno")[0];
 
     // Limpiar el contenido previo
-    infoAlumnoDiv.innerHTML = "";  // Asegúrate de limpiar el contenedor principal
     emailAlumnoDiv.innerHTML = "";
     responsesAlumnoDiv.innerHTML = "";
 
@@ -365,43 +365,53 @@ function showInfoSpecificAlumno() {
             response.style.backgroundColor = "#26D0C3";
             response.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
 
+            // Incorporar un span para las notas, si es aplicable
             let answerText = responses[i].answer === null ? "No hay respuesta" : responses[i].answer;
+
             response.innerHTML = `<strong>${responses[i].description}</strong><br>${answerText}<br>`;
             responsesAlumnoDiv.appendChild(response);
         }
 
-        // Añadir contenido al contenedor principal
-        infoAlumnoDiv.appendChild(emailAlumnoDiv);
-        infoAlumnoDiv.appendChild(responsesAlumnoDiv);
-
-        // Botón de cierre
-        let closeButton = document.createElement('button');
-        closeButton.innerHTML = 'X';
-        closeButton.style.position = 'absolute';
-        closeButton.style.top = '10px';
-        closeButton.style.right = '10px';
-        closeButton.style.padding = '10px 15px';
-        closeButton.style.border = 'none';
-        closeButton.style.background = '#006991';
-        closeButton.style.borderRadius = '10px';
-        closeButton.style.color = 'white';
-        closeButton.style.cursor = 'pointer';
-        closeButton.onclick = function () {
-            infoAlumnoDiv.style.display = 'none';
-        };
-        infoAlumnoDiv.appendChild(closeButton);
-
-        // Estilo y visibilidad del contenedor
-        infoAlumnoDiv.style.backgroundColor = "#05BFAD";
-        infoAlumnoDiv.style.padding = "20px";
-        infoAlumnoDiv.style.borderRadius = "10px";
-        infoAlumnoDiv.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
-        infoAlumnoDiv.style.position = 'relative';  // Importante para posicionar el botón absolutamente respecto a este contenedor
         if (showAlumnosToggle) {
             infoAlumnoDiv.style.display = "block";
         } else {
             infoAlumnoDiv.style.display = "none";
         }
+
+        // Estilo del contenedor de información del alumno
+        infoAlumnoDiv.style.position = "relative"; // Agrega posición relativa
+        infoAlumnoDiv.style.backgroundColor = "#05BFAD";
+        infoAlumnoDiv.style.padding = "20px";
+        infoAlumnoDiv.style.borderRadius = "10px";
+        infoAlumnoDiv.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
+        infoAlumnoDiv.style.marginTop = "20px";
+        infoAlumnoDiv.style.marginBottom = "50px";
+
+
+
+        // Configurar el encabezado y agregar elementos al contenedor principal
+        infoAlumnoDiv.innerHTML = `Información del Alumno`;
+        infoAlumnoDiv.appendChild(emailAlumnoDiv);
+        infoAlumnoDiv.appendChild(responsesAlumnoDiv);
+
+        // Crear botón de cierre
+        let closeButton = document.createElement('button');
+        closeButton.textContent = 'X';
+        closeButton.style.position = 'absolute'; // Ajusta la posición a absoluta
+        closeButton.style.top = '10px';
+        closeButton.style.right = '10px';
+        closeButton.style.padding = '10px 15px';
+        closeButton.style.border = 'none';
+        closeButton.style.background = '#006991';
+        closeButton.style.color = 'white';
+        closeButton.style.cursor = 'pointer';
+        closeButton.style.borderRadius = '10px';
+        closeButton.onclick = function () {
+            infoAlumnoDiv.style.display = 'none';
+        };
+
+        // Añadir el botón de cierre primero para asegurar que no se sobrescriba con otro contenido
+        infoAlumnoDiv.appendChild(closeButton);
     } else {
         console.log("No se encontraron datos del alumno.");
     }
