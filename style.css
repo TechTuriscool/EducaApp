@@ -21,10 +21,30 @@ body {
     border-radius: 10px;
 }
 
+.logo {
+    width: 60%;
+    padding: 40px;
+}
+
+.logo img {
+    width: 100%;
+}
+
 .menu-icon {
-    padding: 20px;
+    margin-top: 20px;
+    padding: 5px 20px;
     display: block;
     cursor: pointer;
+    width: 95%;
+    text-align: center;
+    transition: 0.4s
+}
+
+.menu-icon:hover {
+    background-color: #efefef;
+    transition: 0.4s;
+    border-radius: 10px
+        /* Cambia el color de fondo al pasar el ratón por encima */
 }
 
 .menu {

@@ -7,6 +7,7 @@ let loading = true;
 let searchActive = false;
 let alumnos = []
 let showAlumnosToggle = false;
+let deployCoursesActive = false;
 const requestOptions = {
     method: "GET",
     headers: {
@@ -369,9 +370,16 @@ function showInfoSpecificAlumno() {
     console.log("Email:", email);
 }
 function toggleMenu() {
+    deployCoursesActive = !deployCoursesActive;
     let menu = document.querySelector('.menu');
     let isActive = menu.classList.contains('active');
+    let menuIcon = document.querySelector('.menu-icon');
 
+    if (deployCoursesActive) {
+        menuIcon.textContent = '⬆️ OCULTAR CURSOS ⬆️';
+    } else {
+        menuIcon.textContent = '⬇️ DESPLEGAR LISTADO CURSOS ⬇️';
+    }
     // Verifica si la búsqueda está activa y si el menú está actualmente inactivo
     if (searchActive && !isActive) {
         searchCourse();  // Si hay una búsqueda activa, actualiza la lista de cursos
