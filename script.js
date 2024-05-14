@@ -232,7 +232,7 @@ function recoverySurveyInfoFromLocalStorage() {
             notaGlobalDiv.style.backgroundColor = "lightyellow";
         } else if (notamedia < 2) {
             notaGlobalDiv.style.color = "red";
-            notaGlobalDiv.style.backgroundColor = "pink";
+            notaGlobalDiv.style.backgroundColor = "#ffc0cbbf";
         }
 
         notaGlobalDiv.innerHTML = `${Math.trunc(notamedia * 2)}`;
