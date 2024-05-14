@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
     recoverySurveyInfoFromLocalStorage();
     changeCoruseTitleContent();
 });
+
+if (location.pathname.includes("index.html")) {
+    document.addEventListener('keyup', searchCourse);
+}
+
 async function fetchCourseMeta() {
     try {
         const response = await fetch(
@@ -269,7 +274,6 @@ function recoveryDataSurveyforSpecificUser() {
     showInfoSpecificAlumno();
 
 }
-
 function changeCoruseTitleContent() {
     let courseTitle = localStorage.getItem("courseTitle");
     let courseTitleContent = document.querySelector('.courseTitle');
@@ -320,7 +324,6 @@ function showAlumnos() {
         alert("No hay alumnos en este curso");
     }
 }
-
 function showInfoSpecificAlumno() {
     // Obtener elementos del DOM
     let infoAlumnoDiv = document.getElementsByClassName("infoAlumno")[0];
@@ -365,7 +368,6 @@ function showInfoSpecificAlumno() {
 
     console.log("Email:", email);
 }
-
 function toggleMenu() {
     let menu = document.querySelector('.menu');
     let isActive = menu.classList.contains('active');
@@ -410,7 +412,7 @@ function searchCourse() {
 function resetSearchCourse() {
     let searchInput = document.querySelector('.search-input');
     searchInput.value = '';
-    searchCourse();  // Realiza la búsqueda con el campo vacío para resetear los resultados
+    searchCourse();
 }
 function start() {
     setLoadingMenuIcon(loading = true);

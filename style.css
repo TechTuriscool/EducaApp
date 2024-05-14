@@ -81,29 +81,34 @@ body {
 }
 
 .search button {
-    background-color: #006791;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #05BFAD;
     border: none;
     padding: 10px 30px;
     cursor: pointer;
     margin-left: 10px;
     border-radius: 10px;
     transition: 0.4s;
+    border: solid 1px #05BFAD;
 }
 
 .search button:hover {
     background-color: #05BFAD;
     transform: scale(1.1);
     transition: 0.4s;
+    color: white;
+    border: solid 1px #ffffff;
 }
 
 .search button:last-child {
     background-color: #05BFAD;
+    color: #ffffff;
+    border: solid 1px #05BFAD;
 }
 
 .search button:last-child:hover {
-    background-color: white;
-    border: solid 1px #05BFAD;
-    color:  #05BFAD;
+    background-color: #006791;
+    border: solid 1px #ffffff;
+    color: #ffffff;
     transition: 0.4s;
 }
