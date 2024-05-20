@@ -8,6 +8,7 @@ let searchActive = false;
 let alumnos = []
 let showAlumnosToggle = false;
 let deployCoursesActive = false;
+let optionDisabledifNotForm = false;
 const requestOptions = {
     method: "GET",
     headers: {
@@ -118,8 +119,7 @@ async function checkIfCourseHasForm(courseId) {
                 learningUnits.push(sections[i].learningUnits[j]);
             }
         }
-        console.log("Learning Units:", learningUnits);
-        console.log("Learning Units with Form:", learningUnitsWithForm);
+
 
         if (learningUnitsWithForm.length > 0) {
             localStorage.setItem("learningUnitsWithForm", JSON.stringify(learningUnitsWithForm));
@@ -155,6 +155,9 @@ async function recoverySurveyInfo(SurveyID) {
             requestOptions
         );
         if (!response.ok) {
+            //hacer que las opciones esten deshabilitadas si no hay formulario
+
+
             alert("Este curso no tiene formulario, o el formulario no contiene respuestas");
             localStorage.removeItem("learningUnitsWithForm");
             throw new Error("Failed to fetch survey info");
@@ -361,7 +364,7 @@ function showInfoSpecificAlumno() {
             response.style.margin = "10px 0";
             response.style.padding = "10px";
             response.style.borderRadius = "8px";
-            response.style.backgroundColor = "#26D0C3";
+            response.style.backgroundColor = "#efefef";
             response.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
 
             // Incorporar un span para las notas, si es aplicable
@@ -378,10 +381,11 @@ function showInfoSpecificAlumno() {
         infoAlumnoDiv.style.visibility = "visible";
         infoAlumnoDiv.style.opacity = "1"
         infoAlumnoDiv.style.transition = "visibility 0s, opacity 0.4s";
-        infoAlumnoDiv.style.backgroundColor = "#05BFAD";
+        infoAlumnoDiv.style.backgroundColor = "white";
         infoAlumnoDiv.style.padding = "20px";
         infoAlumnoDiv.style.borderRadius = "10px";
         infoAlumnoDiv.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
+        infoAlumnoDiv.style.color = "black";
 
         // Configurar el encabezado y agregar elementos al contenedor principal
         infoAlumnoDiv.innerHTML = `Información del Alumno`;
@@ -410,7 +414,6 @@ function showInfoSpecificAlumno() {
         console.log("No se encontraron datos del alumno.");
     }
 }
-
 function toggleMenu() {
     let menu = document.querySelector('.menu');
     let isActive = menu.classList.contains('active');
