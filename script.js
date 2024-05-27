@@ -22,9 +22,11 @@ const requestOptions = {
         "Lw-Client": id,
     },
 };
+
 document.addEventListener('DOMContentLoaded', function () {
     recoverySurveyInfoFromLocalStorage();
     changeCoruseTitleContent();
+    addOpinionsToContainer();
 });
 
 if (location.pathname.includes("index.html") || !location.pathname.includes("course.html")) {
@@ -59,7 +61,6 @@ async function fetchCourseData() {
                 throw new Error("Failed to fetch cursos");
             }
             const data = await response.json();
-            //añadio los cursos al array si no contienen palabras prohibidas
             data.data.forEach(course => {
                 if (!arrayNamesForbidden.some(word => course.title.toLowerCase().includes(word.toLowerCase()))) {
                     courseList.push(course);
@@ -102,9 +103,6 @@ async function fetchCourseContent(courseId, courseTitle) {
         console.error("Error:", error);
     }
 }
-
-
-
 
 async function checkIfCourseHasForm(courseId) {
     try {
@@ -170,6 +168,7 @@ async function recoverySurveyInfo(SurveyID) {
 }
 
 function recoverySurveyInfoFromLocalStorage() {
+    let opinionDiv = document.getElementById("opinionContainer");
     let notaMediaDiv = document.getElementsByClassName("notaMedia")[0];
     let notaMediaStarsDiv = document.getElementsByClassName("notaMediaStars")[0];
     let mensajeOpinionDiv = document.getElementsByClassName("mensajeOpinion")[0];
@@ -200,18 +199,25 @@ function recoverySurveyInfoFromLocalStorage() {
         notamedia = notasFinales.reduce((acc, nota) => acc + parseInt(nota), 0) / notasFinales.length;
         notamedia = notamedia.toFixed(2);
 
+        let hasOpinions = false;
+
         settingsObj.data.forEach(item => {
-            let opinion = item.answers[4].answer;
-            if (opinion !== null) {
-                mensajes.push(opinion);
-            } else {
-                mensajeOpinionDiv.style.color = "black";
-                mensajes.push("⚠️ Los usuarios no han dejado opiniones sobre este curso");
+            let opinion = item.answers[4]?.answer?.trim();
+            if (opinion && opinion.toLowerCase() !== 'null') {
+                hasOpinions = true;
+                let opinionP = document.createElement('p');
+                opinionP.classList.add('opinionP');
+                opinionP.innerHTML = `<strong>${item.email}</strong>: ${opinion}`;
+                opinionDiv.appendChild(opinionP);
             }
         });
 
-        mensajes = [...new Set(mensajes)];
-        mensajeOpinionDiv.innerHTML = `${mensajes}`;
+        if (!hasOpinions) {
+            mensajeOpinionDiv.style.color = "black";
+            mensajeOpinionDiv.textContent = "⚠️ Los usuarios no han dejado opiniones sobre este curso";
+        } else {
+            mensajeOpinionDiv.textContent = ""; // Clear any previous message if there are opinions
+        }
 
         if (notamedia >= 4) {
             notaGlobalDiv.style.color = "green";
@@ -225,7 +231,7 @@ function recoverySurveyInfoFromLocalStorage() {
         }
 
         notaGlobalDiv.innerHTML = `${Math.trunc(notamedia * 2)}`;
-        notaMediaDiv.innerHTML = `Media Gobal: ${notamedia}`;
+        notaMediaDiv.innerHTML = `Media Global: ${notamedia}`;
         notaMediaDiv.appendChild(notaGlobalDiv);
 
         for (let i = 0; i <= 5; i++) {
@@ -240,6 +246,8 @@ function recoverySurveyInfoFromLocalStorage() {
 
     return notamedia;
 }
+
+
 
 function recoveryDataSurveyforSpecificUser() {
     let surveyInfo = localStorage.getItem("surveyInfo");
@@ -271,7 +279,7 @@ function showAlumnos() {
     } else {
         infoAlumnoDiv.style.display = 'none';
         alumnosMenu.style.display = 'none';
-        alumnosIconDiv.textContent = '⬇️ SELECIONA UN ALUMNO ⬇️';
+        alumnosIconDiv.textContent = '⬇️ SELECCIONA UN ALUMNO ⬇️';
         alumnosIconDiv.style.backgroundColor = "#ffffff";
         alumnosIconDiv.style.color = "black";
         return;
@@ -443,12 +451,10 @@ function resetSearchCourse() {
 }
 
 async function start() {
-
     setLoadingMenuIcon(true);
     await fetchCourseMeta();
     await getAllCourseIds();
     await populateCategoryMenu();
-
 }
 
 async function getAllCourseIds() {
@@ -471,10 +477,10 @@ async function getAllCourseIds() {
 function populateCategoryMenu() {
     console.log(categories);
     let categoryCardsContainer = document.querySelector('#categoryCards');
-        let option = document.createElement('option');
-        option.textContent = 'Filtrar por categoria';
-        option.style.cursor = 'pointer';
-        categoryCardsContainer.appendChild(option);
+    let option = document.createElement('option');
+    option.textContent = 'Filtrar por categoria';
+    option.style.cursor = 'pointer';
+    categoryCardsContainer.appendChild(option);
     categories.forEach(category => {
         let option = document.createElement('option');
         option.textContent = category;
@@ -482,19 +488,10 @@ function populateCategoryMenu() {
         categoryCardsContainer.appendChild(option);
     });
     categoryCardsContainer.addEventListener('change', (e) => {
-
         let selectedCategory = e.target.value;
         let courseListFiltered = courseList.filter(course => course.categories.includes(selectedCategory));
         populateMenu(courseListFiltered);
     });
 }
 
-
-
-
 start();
-
-
-
-
-
